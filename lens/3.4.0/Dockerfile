@@ -2,6 +2,7 @@ FROM node:lts-buster as builder
 WORKDIR /src
 RUN git clone https://github.com/lensapp/lens.git && \
 	cd lens && \
+	yarn config set network-timeout 300000 && \
 	make build
 
 FROM ubuntu:focal
