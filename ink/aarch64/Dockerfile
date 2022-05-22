@@ -7,10 +7,10 @@ RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential pkg-config wget libusb-1.0-0 libusb-1.0-0-dev && \
 	wget http://downloads.sourceforge.net/ink/ink-${INK_VERSION}.tar.gz && \
 	wget http://downloads.sourceforge.net/libinklevel/libinklevel-${LIBINKLEVEL_VERSION}.tar.gz && \
-	tar xpf libinklevel-0.9.3.tar.gz && \
-	(cd libinklevel-0.9.3 && ./configure --prefix=/usr && make && make install && cd ..) && \
-	tar xpf ink-0.5.3.tar.gz && \
-	(cd ink-0.5.3 && ./configure --prefix=/usr && make && make install && cd ..)
+	tar xpf libinklevel-${LIBINKLEVEL_VERSION}.tar.gz && \
+	(cd libinklevel-${LIBINKLEVEL_VERSION} && ./configure --prefix=/usr && make && make install) && \
+	tar xpf ink-${INK_VERSION}.tar.gz && \
+	(cd ink-${INK_VERSION} && ./configure --prefix=/usr && make && make install)
 
 FROM arm64v8/ubuntu:latest
 COPY --from=build /usr/lib/libinklevel.* /usr/lib/
