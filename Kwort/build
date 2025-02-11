@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+PUSH=${1}
+
+mkdir -p /tmp/kwort-docker/{full,minimal}
+
+./rootfs-4.4.sh
+docker build --no-cache -f Dockerfile -t nomius/kwort:4.4-minimal --build-arg ROOTFS=kwortfs.tar.gz --build-arg IMAGE_SUBVERSION=minimal /tmp/kwort-docker/minimal
+
+./rootfs-4.4.sh -f
+docker build --no-cache -f Dockerfile -t nomius/kwort:4.4 --build-arg ROOTFS=kwortfs.tar.gz --build-arg IMAGE_SUBVERSION=full /tmp/kwort-docker/full
+
+if [ "${PUSH}" == "-p" ]; then
+	docker push nomius/kwort:4.4-minimal
+	docker push nomius/kwort:4.4
+fi
