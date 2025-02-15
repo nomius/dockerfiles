@@ -65,6 +65,10 @@ if [ "${FULL}" == "-f" ]; then
 	   /var/packages/downloads/libarchive#3.7.7#x86_64#1.tar.xz \
 	   /var/packages/downloads/libdevmapper#1.02.204#x86_64#1.tar.xz \
 	   /var/packages/downloads/libtirpc#1.3.6#x86_64#1.tar.xz \
+	   /var/packages/downloads/libidn2#2.3.7#x86_64#1.tar.xz \
+	   /var/packages/downloads/libbsd#0.12.2#x86_64#1.tar.xz \
+	   /var/packages/downloads/libunistring#1.3#x86_64#1.tar.xz \
+	   /var/packages/downloads/iputils#20240905#x86_64#1.tar.xz \
 	   /var/packages/downloads/man-db#2.13.0#x86_64#1.tar.xz \
 	   /var/packages/downloads/man-pages#6.10#x86_64#1.tar.xz \
 	   /var/packages/downloads/openssh#9.9p1#x86_64#1.tar.xz \
