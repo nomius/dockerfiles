@@ -1,0 +1,39 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:2025.02.4
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
+      - "443:443/tcp"
+    environment:
+      TZ: ${TZ}
+      FTLCONF_webserver_api_password: ${WEBPASSWORD}
+      FTLCONF_dns_upstreams: "unbound#5335"
+    dns:
+      - 1.1.1.1
+    depends_on:
+      unbound:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+      - /mnt/dietpi_userdata/containers-data/pihole6:/etc/pihole
+  unbound:
+    container_name: unbound
+    image: alpinelinux/unbound:latest
+    ports:
+      - "5335:5335/udp"
+      - "5335:5335/tcp"
+    volumes:
+      - ./unbound.conf:/etc/unbound/unbound.conf
+    environment:
+      TZ: ${TZ}
+    healthcheck:
+      test: [ "CMD", "nslookup", "google.com", "unbound:5335" ]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+    restart: unless-stopped
+
