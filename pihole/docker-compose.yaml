@@ -18,7 +18,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     volumes:
-      - /mnt/dietpi_userdata/containers-data/pihole6:/etc/pihole
+      - /data/pihole:/etc/pihole
   unbound:
     container_name: unbound
     image: alpinelinux/unbound:latest
